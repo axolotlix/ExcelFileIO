@@ -1,4 +1,4 @@
-# ExcelIOHelpers
+# ExcelFileIO
 ## Helper methods for excel input and output, ideal for use with selenium
 
 Supports following filetypes with read and write methods:
