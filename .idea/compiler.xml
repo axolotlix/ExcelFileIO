@@ -9,8 +9,8 @@
         <module name="ExcelFileIO" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ExcelFileIO" target="1.8" />
+    <bytecodeTargetLevel target="9">
+      <module name="ExcelFileIO" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>

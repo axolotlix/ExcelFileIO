@@ -106,7 +106,7 @@ public class ExcelTestDataIO {
             for (List<String> line : data){
                 for (int k = 0; k < line.size(); k++) {
                     writer.write(line.get(k));
-                    if (k == line.size())
+                    if (k < line.size() - 1)
                         writer.write(",");
                     else
                         writer.newLine();

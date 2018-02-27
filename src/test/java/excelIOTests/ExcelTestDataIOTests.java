@@ -1,20 +1,22 @@
 package excelIOTests;
 
-import utils.ExcelTestDataIO;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import utils.ExcelTestDataIO;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertTrue;
+
 public class ExcelTestDataIOTests {
 
-    private ExcelTestDataIO io;
-    private static final String READ_FILENAME = "testdata";
-    private static final String WRITE_FILENAME = "newtestdata";
+    private static ExcelTestDataIO io;
+    private static final String READ_FILENAME = "exampletestdata";
+    private static final String WRITE_FILENAME = "exampletestdata(2)";
     private static final String USERNAME = "admin";
 
-    @Before
+    @BeforeClass
     public void setup() {
         io = new ExcelTestDataIO();
     }
@@ -22,13 +24,13 @@ public class ExcelTestDataIOTests {
     @Test
     public void readXLSTest() {
         String ext = ".xls";
-        assert(io.readTestInputsXLS(READ_FILENAME + ext).get("username").equals(USERNAME));
+        assertTrue("File contents not equal", io.readTestInputsXLS(READ_FILENAME + ext).get("username").equals(USERNAME));
     }
 
     @Test
     public void readXLSXTest() {
         String ext = ".xlsx";
-        assert(io.readTestInputsXLSX(READ_FILENAME + ext).get("username").equals(USERNAME));
+        assertTrue("File contents not equal", io.readTestInputsXLSX(READ_FILENAME + ext).get("username").equals(USERNAME));
     }
 
     @Test
@@ -38,7 +40,7 @@ public class ExcelTestDataIOTests {
         data.add(TestHelper.getLineOne());
         data.add(TestHelper.getLineTwo());
         io.writeXLSFile(WRITE_FILENAME + ext, "Sheet1", data);
-        assert(io.readTestInputsXLS(WRITE_FILENAME + ext).get("password").equals("password123"));
+        assertTrue("File contents not equal", io.readTestInputsXLS(WRITE_FILENAME + ext).get("password").equals("password123"));
     }
 
     @Test
@@ -48,13 +50,13 @@ public class ExcelTestDataIOTests {
         data.add(TestHelper.getLineOne());
         data.add(TestHelper.getLineTwo());
         io.writeXLSXFile(WRITE_FILENAME + ext, "Sheet1", data);
-        assert(io.readTestInputsXLSX(WRITE_FILENAME + ext).get("password").equals("password123"));
+        assertTrue("File contents not equal", io.readTestInputsXLSX(WRITE_FILENAME + ext).get("password").equals("password123"));
     }
 
     @Test
     public void readCSVTest() {
         String ext = ".csv";
-        assert(io.readCSV(READ_FILENAME + ext).get(0).get(0).equals("username"));
+        assertTrue("File contents not equal", io.readCSV(READ_FILENAME + ext).get(0).get(0).equals("username"));
     }
 
     @Test
@@ -64,6 +66,6 @@ public class ExcelTestDataIOTests {
         data.add(TestHelper.getLineOne());
         data.add(TestHelper.getLineTwo());
         io.writeCSV(WRITE_FILENAME + ext, data);
-        assert(io.readCSV(WRITE_FILENAME + ext).get(0).get(0).equals("username"));
+        assertTrue("File contents not equal", io.readCSV(WRITE_FILENAME + ext).get(0).get(0).equals("username"));
     }
 }
