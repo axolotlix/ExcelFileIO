@@ -18,9 +18,11 @@ import java.util.*;
 
 public class ExcelTestDataIO {
 
+    private static final String RESOURCE_PATH = System.getProperty("user.dir") + "\\resources\\";
+
     public Map<String, String> readTestInputsXLS(String filename) {
         Map<String, String> data = new HashMap<>();
-        try (HSSFWorkbook wb = new HSSFWorkbook(Files.newInputStream(Paths.get(filename)))) {
+        try (HSSFWorkbook wb = new HSSFWorkbook(Files.newInputStream(Paths.get(RESOURCE_PATH + filename)))) {
             DataFormatter formatter = new DataFormatter();
             HSSFSheet sheet = wb.getSheetAt(0);
             HSSFRow row;
@@ -55,7 +57,7 @@ public class ExcelTestDataIO {
 
     public Map<String, String> readTestInputsXLSX(String filename) {
         Map<String, String> data = new HashMap<>();
-        try (XSSFWorkbook wb = new XSSFWorkbook(Files.newInputStream(Paths.get(filename)))) {
+        try (XSSFWorkbook wb = new XSSFWorkbook(Files.newInputStream(Paths.get(RESOURCE_PATH + filename)))) {
             DataFormatter formatter = new DataFormatter();
             XSSFSheet sheet = wb.getSheetAt(0);
             XSSFRow row;
@@ -90,7 +92,7 @@ public class ExcelTestDataIO {
     public List<List<String>> readCSV(String filename){
         List<List<String>> data = new ArrayList<>();
         String line;
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(filename))){
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(RESOURCE_PATH + filename))){
             while ((line = reader.readLine()) != null) {
                 ArrayList<String> cells = new ArrayList<>();
                 Collections.addAll(cells, line.split(","));
@@ -102,7 +104,7 @@ public class ExcelTestDataIO {
         return data;
     }
     public void writeCSV(String filename, List<List<String>> data) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))){
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(RESOURCE_PATH + filename))){
             for (List<String> line : data){
                 for (int k = 0; k < line.size(); k++) {
                     writer.write(line.get(k));
@@ -117,7 +119,7 @@ public class ExcelTestDataIO {
         }
     }
     private void writeFile(Workbook wb, String filename) {
-        try (OutputStream fileOut = Files.newOutputStream(Paths.get(filename))){
+        try (OutputStream fileOut = Files.newOutputStream(Paths.get(RESOURCE_PATH + filename))){
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
