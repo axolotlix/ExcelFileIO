@@ -18,7 +18,7 @@ import java.util.*;
 
 public class ExcelTestDataIO {
 
-    private static final String RESOURCE_PATH = System.getProperty("user.dir") + "\\resources\\";
+    private static final String RESOURCE_PATH = System.getProperty("user.dir") + "\\src\\test\\resources\\";
 
     public Map<String, String> readTestInputsXLS(String filename) {
         Map<String, String> data = new HashMap<>();

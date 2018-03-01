@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasicTestWD extends DriverFactory {
 
     private void googleExampleThatSearchesFor(final String searchString) throws Exception {
-
         WebDriver driver = DriverFactory.getDriver();
 
         driver.get("http://www.google.com");
@@ -32,15 +31,11 @@ public class BasicTestWD extends DriverFactory {
         });
 
         System.out.println("Page title is: " + driver.getTitle());
-
-        quitDriver();
     }
-
     @Test
     public void googleCheeseExample() throws Exception {
         googleExampleThatSearchesFor("Cheese!");
     }
-
     @Test
     public void googleBreadExample() throws Exception {
         googleExampleThatSearchesFor("Bread!");

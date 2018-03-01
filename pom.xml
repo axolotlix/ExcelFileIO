@@ -3,9 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>ExcelFileIO</groupId>
-    <artifactId>ExcelFileIO</artifactId>
+    <groupId>com.github.axolotlix.exceltestdataio</groupId>
+    <artifactId>exceltestdataio</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <maven.compiler.source>9</maven.compiler.source>
@@ -17,7 +16,9 @@
         <poi-ooxml.version>3.17</poi-ooxml.version>
         <junit.version>4.12</junit.version>
         <!-- Configurable variables -->
-        <threads>2</threads>
+        <threads>1</threads>
+        <browser>firefox</browser>
+        <overwrite.binaries>false</overwrite.binaries>
     </properties>
     <build>
         <plugins>
@@ -28,6 +29,15 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>${threads}</threadCount>
+                    <systemProperties>
+                        <browser>${browser}</browser>
+                        <!--Set properties passed in by binary downloader-->
+                        <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+                        <webdriver.ie.driver>${webdriver.ie.driver}</webdriver.ie.driver>
+                        <webdriver.opera.driver>${webdriver.opera.driver}</webdriver.opera.driver>
+                        <webdriver.gecko.driver>${webdriver.gecko.driver}</webdriver.gecko.driver>
+                        <webdriver.edge.driver>${webdriver.edge.driver}</webdriver.edge.driver>
+                    </systemProperties>
                     <includes>
                         <include>**/*WD.java</include>
                     </includes>
@@ -46,10 +56,10 @@
                 <artifactId>driver-binary-downloader-maven-plugin</artifactId>
                 <version>1.0.17</version>
                 <configuration>
-                    <!-- root directory that downloaded driver binaries will be stored in -->
-                    <rootStandaloneServerDirectory>./resources/drivers/binaries</rootStandaloneServerDirectory>
-                    <!-- Where you want to store downloaded zip files -->
-                    <downloadedZipFileDirectory>./resources/drivers/zips</downloadedZipFileDirectory>
+                    <rootStandaloneServerDirectory>${project.basedir}/src/test/resources/drivers/binaries</rootStandaloneServerDirectory>
+                    <downloadedZipFileDirectory>${project.basedir}/src/test/resources/drivers/zips</downloadedZipFileDirectory>
+                    <customRepositoryMap>${project.basedir}/src/test/resources/RepositoryMap.xml</customRepositoryMap>
+                    <overwriteFilesThatExist>${overwrite.binaries}</overwriteFilesThatExist>
                 </configuration>
                 <executions>
                     <execution>
